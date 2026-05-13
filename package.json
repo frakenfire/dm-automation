@@ -1,0 +1,7 @@
+{
+  "name": "dm-automation-root",
+  "version": "1.0.0",
+  "scripts": {
+    "assist:instagram": "npm --prefix browser-agent run assist:instagram"
+  }
+}

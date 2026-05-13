@@ -1,0 +1,28 @@
+{
+  "name": "browser-agent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup:sheet": "ts-node src/scripts/setupSheet.ts",
+    "validate:sheet": "ts-node src/scripts/validateSheet.ts",
+    "dryrun:instagram": "ts-node src/scripts/dryRunInstagram.ts",
+    "dryrun:x": "ts-node src/scripts/dryRunX.ts",
+    "assist:instagram": "ts-node src/scripts/runAssistInstagram.ts",
+    "send:instagram": "ts-node src/scripts/runAutoInstagram.ts",
+    "test": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.7.0",
+    "dotenv": "^17.4.2",
+    "googleapis": "^171.4.0",
+    "playwright": "^1.60.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
