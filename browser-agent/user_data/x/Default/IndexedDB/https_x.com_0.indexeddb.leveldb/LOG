@@ -1,7 +1,0 @@
-2026/05/13-17:38:17.922 4e98 Reusing MANIFEST C:\Users\fpdlw\Downloads\디엠 자동화\browser-agent\user_data\x\Default\IndexedDB\https_x.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/05/13-17:38:17.922 4e98 Recovering log #3
-2026/05/13-17:38:17.922 4e98 Reusing old log C:\Users\fpdlw\Downloads\디엠 자동화\browser-agent\user_data\x\Default\IndexedDB\https_x.com_0.indexeddb.leveldb/000003.log 
-2026/05/13-18:55:19.428 4e98 Level-0 table #5: started
-2026/05/13-18:55:19.429 4e98 Level-0 table #5: 1122 bytes OK
-2026/05/13-18:55:19.431 4e98 Delete type=0 #3
-2026/05/13-18:55:19.431 4e98 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
