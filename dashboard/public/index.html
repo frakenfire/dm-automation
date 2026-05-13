@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P.CALM Seeding Dashboard | Production Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1 class="logo">P.CALM <span>Seeding Control</span></h1>
+            <div class="status-badge" id="browser-status">System Operational</div>
+        </header>
+
+        <!-- 상단: 진행률 바 -->
+        <section class="service-card progress-card" id="progress-card">
+            <div class="progress-info">
+                <span id="progress-text">시딩 대기 중...</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </section>
+
+        <main class="dashboard-grid">
+            <!-- ⬅️ 좌측: 제어 패널 -->
+            <aside class="service-card control-panel">
+                <div class="input-group">
+                    <label for="target-handle">타겟 핸들</label>
+                    <input type="text" id="target-handle" value="pcalm_official">
+                </div>
+                
+                <div class="input-group">
+                    <label for="dm-message">발송 메시지</label>
+                    <textarea id="dm-message" rows="12">안녕하세요. P.CALM 시딩 자동화 시스템 실전 테스트 발송입니다.</textarea>
+                </div>
+
+                <div class="options-group">
+                    <label class="switch">
+                        <input type="checkbox" id="headless-mode" style="display:none">
+                        <span class="slider"></span>
+                        <span>백그라운드 실행 (비권장)</span>
+                    </label>
+                </div>
+
+                <div class="btn-group">
+                    <button id="send-btn" class="cta-btn">
+                        <span>DM 발송 시작</span>
+                        <div class="loader" id="btn-loader"></div>
+                    </button>
+                </div>
+                <p style="font-size:12px; color:var(--caption-text-color); margin-top:15px; text-align:center;">
+                    * 발송이 시작되면 브라우저 창이 직접 활성화됩니다.
+                </p>
+            </aside>
+
+            <!-- ➡️ 우측: 실시간 로그 (확장) -->
+            <section class="service-card log-panel">
+                <div class="log-header">
+                    <h2>실시간 실행 로그</h2>
+                    <button id="clear-log" class="text-btn">로그 초기화</button>
+                </div>
+                <div id="log-container" class="log-viewport">
+                    <div class="log-entry system">관제 센터 준비 완료. 내일 아침 시딩을 시작하세요.</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

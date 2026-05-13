@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+
+:root {
+    --primary-brand-color: #1A73E8;
+    --primary-hover-color: #0057B8;
+    --base-text-color: #212121;
+    --secondary-text-color: #424242;
+    --caption-text-color: #757575;
+    --border-color: #E0E0E0;
+    --white-bg: #FFFFFF;
+    --light-gray-bg: #F5F5F5;
+    --lighter-blue-bg: #E9F1FA;
+    --success-color: #34A853;
+    --error-color: #EA4335;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--white-bg);
+    color: var(--base-text-color);
+    line-height: 1.4;
+    overflow: hidden;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo { font-size: 24px; font-weight: 900; }
+.logo span { color: var(--primary-brand-color); }
+
+.status-badge {
+    background: var(--lighter-blue-bg);
+    color: var(--primary-brand-color);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* 🔝 상단 진행바 */
+.progress-card { padding: 15px 24px; margin-bottom: 20px; }
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
+#progress-text { font-size: 16px; font-weight: 700; color: var(--primary-brand-color); }
+#progress-percent { font-size: 16px; font-weight: 900; }
+.progress-bar-container { width: 100%; height: 10px; background-color: var(--light-gray-bg); border-radius: 5px; overflow: hidden; }
+.progress-bar-fill { width: 0%; height: 100%; background-color: var(--primary-brand-color); transition: width 0.5s ease; }
+
+/* ⏹ 메인 그리드 (2컬럼 생산성 모드) */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 400px 1fr; /* ⬅️제어, ➡️로그 확장 */
+    gap: 30px;
+    flex: 1;
+    min-height: 0;
+}
+
+.service-card {
+    background: var(--white-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ⬅️ 제어 패널 */
+.input-group { margin-bottom: 20px; }
+label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--caption-text-color); }
+input, textarea { 
+    width: 100%; padding: 12px; border: 1px solid var(--border-color); 
+    border-radius: 6px; font-size: 15px; background-color: var(--light-gray-bg);
+    font-family: inherit;
+}
+
+.cta-btn {
+    width: 100%; background-color: var(--primary-brand-color);
+    color: white; padding: 16px; border-radius: 8px; border: none;
+    font-weight: 700; font-size: 18px; cursor: pointer;
+    position: relative;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.cta-btn:hover { background-color: var(--primary-hover-color); transform: translateY(-1px); }
+.cta-btn.success { background-color: var(--success-color); }
+
+/* ➡️ 로그 패널 (확장형) */
+.log-panel { flex: 1; }
+.log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.log-header h2 { font-size: 18px; font-weight: 900; }
+.text-btn { background: none; border: none; color: var(--caption-text-color); cursor: pointer; font-size: 13px; }
+
+.log-viewport {
+    flex: 1; background-color: #F8F9FA; padding: 20px; border-radius: 6px;
+    font-size: 14px; overflow-y: auto; border: 1px solid var(--border-color);
+    font-family: 'Cascadia Code', 'Consolas', monospace; line-height: 1.6;
+}
+
+.log-entry { margin-bottom: 6px; border-bottom: 1px solid rgba(0,0,0,0.03); padding-bottom: 4px; }
+.log-entry.step { color: var(--primary-brand-color); font-weight: 700; }
+.log-entry.success { color: var(--success-color); font-weight: 700; }
+.log-time { color: var(--caption-text-color); margin-right: 8px; font-size: 12px; }
+
+/* Switch Toggle */
+.options-group { margin-bottom: 20px; }
+.switch { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.slider { width: 40px; height: 20px; background-color: var(--border-color); border-radius: 20px; position: relative; }
+.slider:before { content: ""; position: absolute; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--primary-brand-color); }
+input:checked + .slider:before { transform: translateX(20px); }
+
+.loader {
+    position: absolute; right: 24px;
+    width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff; border-radius: 50%;
+    animation: spin 1s infinite linear; display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

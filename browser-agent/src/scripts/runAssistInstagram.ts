@@ -4,14 +4,16 @@ import { checkInstagramLogin } from '../platforms/instagram/instagramLoginCheck'
 import { sendInstagramDm } from '../platforms/instagram/instagramDmSender';
 
 async function runAssistInstagram() {
-  const targetDisplayName = 'P.CALM Global Official';
-  const targetHandle = 'pcalm_official';
-  const message = '안녕하세요. P.CALM 글로벌 공식 계정 시딩 자동화 테스트입니다.';
+  // 웹 대시보드 환경 변수 우선 적용, 없으면 기본값 사용
+  const targetHandle = process.env.TARGET_HANDLE || 'pcalm_official';
+  const targetDisplayName = process.env.TARGET_DISPLAY_NAME || 'P.CALM Global Official';
+  const message = process.env.TARGET_MESSAGE || '안녕하세요. P.CALM 글로벌 공식 계정 시딩 자동화 테스트입니다.';
+  const isHeadless = process.env.HEADLESS === 'true';
 
-  console.log(`[시작] 인스타그램 시딩 자동화 - 대상: ${targetDisplayName}`);
+  console.log(`[시작] 인스타그램 시딩 자동화 - 대상: @${targetHandle} (${targetDisplayName})`);
   
   const browser = await chromium.launchPersistentContext(config.instagram.userDataDir, {
-    headless: false,
+    headless: isHeadless,
   });
   
   const page = await browser.newPage();
@@ -75,7 +77,7 @@ async function runAssistInstagram() {
     }
 
     // 메시지 작성 및 전송
-    console.log(`[단계 5] ${targetDisplayName} 계정에 메시지를 작성하고 전송합니다...`);
+    console.log(`[단계 4] ${targetDisplayName} 계정에 메시지를 작성합니다...`);
     const result = await sendInstagramDm(page, targetHandle, message, 'auto', 'AUTO-TEST-FINAL');
     
     if (result === 'SENT') {

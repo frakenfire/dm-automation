@@ -10,6 +10,7 @@
     "dryrun:x": "ts-node src/scripts/dryRunX.ts",
     "assist:instagram": "ts-node src/scripts/runAssistInstagram.ts",
     "send:instagram": "ts-node src/scripts/runAutoInstagram.ts",
+    "ts-node": "ts-node",
     "test": "npx playwright test"
   },
   "keywords": [],

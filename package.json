@@ -2,6 +2,11 @@
   "name": "dm-automation-root",
   "version": "1.0.0",
   "scripts": {
-    "assist:instagram": "npm --prefix browser-agent run assist:instagram"
+    "assist:instagram": "npm --prefix browser-agent run assist:instagram",
+    "dashboard": "node dashboard/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3"
   }
 }
