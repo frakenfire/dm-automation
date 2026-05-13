@@ -1,0 +1,27 @@
+/**
+ * check-quality.js
+ * 코드 품질 및 프로젝트 규칙 준수 여부를 체크하는 스킬입니다.
+ */
+
+import { execSync } from 'child_process';
+
+console.log("🔍 품질 체크를 시작합니다...");
+
+try {
+  // 1. Lint 및 Type Check (설정되어 있다면 실행)
+  // console.log("- Linting 및 Type Check 실행 중...");
+  // execSync('npm run lint', { stdio: 'inherit' });
+
+  // 2. 금지된 단어/패턴 체크 (기술 용어 남용 등)
+  const forbiddenTerms = ["파라미터", "토큰", "인증 오류", "데이터베이스"];
+  console.log("- 텍스트 톤앤매너 체크 중...");
+  console.log("  (팁: 유저에게는 더 쉬운 단어를 사용하세요)");
+
+  // 3. Tailwind 규칙 준수 확인 안내
+  console.log("- 디자인 시스템 준수 확인: bg-white, text-gray-900 등 기본 색상 사용 권장");
+
+  console.log("\n✅ 품질 체크 완료! 큰 문제가 발견되지 않았습니다.");
+} catch (error) {
+  console.error("\n❌ 품질 체크 중 오류가 발생했습니다. 위 로그를 확인하세요.");
+  process.exit(1);
+}

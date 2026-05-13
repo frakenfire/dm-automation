@@ -1,0 +1,27 @@
+/**
+ * verify-ui.js (Strict Edition)
+ * AI 에이전트가 UI의 시각적/구조적 무결성을 100% 검증하기 위한 스킬입니다.
+ */
+
+const strictChecklist = [
+  { id: "ANIMATION", label: "Framer Motion 애니메이션이 지연 없이 부드럽게 작동하는가?", critical: true },
+  { id: "TONE", label: "모든 텍스트가 '토스라이팅'(공감, 응원) 스타일을 완벽히 따르는가?", critical: true },
+  { id: "DESIGN_SYSTEM", label: "Tailwind 색상표 및 index.css의 CSS 변수를 100% 준수했는가?", critical: true },
+  { id: "RESPONSIVE", label: "375px(모바일)부터 1920px(데스크탑)까지 레이아웃이 완벽한가?", critical: true },
+  { id: "GAMIFICATION", label: "미션/퀘스트/연구소 등 프로젝트 고유 세계관 키워드가 유지되고 있는가?", critical: false },
+  { id: "NO_PLACEHOLDER", label: "플레이스홀더 이미지가 하나도 없는가?", critical: true }
+];
+
+console.log("🛡️ UI 절대 무결성 검증 시작 (Strict Mode)...");
+console.log("-----------------------------------------");
+
+let issues = 0;
+strictChecklist.forEach(item => {
+  console.log(`[ ] ${item.label}${item.critical ? " (CRITICAL)" : ""}`);
+});
+
+console.log("-----------------------------------------");
+console.log("💡 에이전트 행동 지침:");
+console.log("1. browser_subagent를 열어 실제 화면을 캡처하고 위 항목을 대조하세요.");
+console.log("2. CRITICAL 항목 중 하나라도 의심되면 '완료' 보고를 하지 마세요.");
+console.log("3. 의심되는 부분은 즉시 수정 후 재검증하세요.");
