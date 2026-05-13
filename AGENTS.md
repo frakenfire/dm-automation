@@ -13,8 +13,8 @@
 - **Tool-Biased Operation**: 추측보다는 실제 CLI 명령어를 우선하여 정보를 수집합니다.
 - **Mandatory Visual Verification**: 모든 UI/UX 작업이 완료된 후에는 반드시 브라우저 도구를 사용하여 결과를 시각적으로 확인하고 유저에게 증거(스크린샷 등)를 제출합니다.
 
-## 🛠 검증 하네스 (Verification Scripts)
-에이전트는 보고 전 반드시 다음 검증을 통과해야 합니다:
-- `check-quality.js`: 코드 스타일 및 톤앤매너 검증.
-- `check-reality.js`: 보고 내용과 실제 파일 시스템 상태 대조.
-- `verify-ui.js`: UI 렌더링 무결성 및 디자인 시스템 준수 확인.
+## 🛠 검증 하네스 (Verification Scripts - Global Hub)
+에이전트는 보고 전 반드시 다음 글로벌 스킬을 통해 검증을 통과해야 합니다:
+- `C:\Users\fpdlw\Downloads\skills\check-quality.js`: 코드 스타일 및 톤앤매너 검증.
+- `C:\Users\fpdlw\Downloads\skills\check-reality.js`: 보고 내용과 실제 파일 시스템 상태 대조.
+- `C:\Users\fpdlw\Downloads\skills\verify-ui.js`: UI 렌더링 무결성 및 디자인 시스템 준수 확인.
