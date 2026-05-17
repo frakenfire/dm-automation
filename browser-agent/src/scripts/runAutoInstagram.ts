@@ -41,19 +41,23 @@ async function runAutoInstagram() {
         await page.waitForTimeout(5000);
 
         // Click "New Message" button
-        const newMessageButton = await page.getByRole('button', { name: /새 메시지|New Message|메시지 보내기|Send Message/i }).first();
+        const newMessageButton = page.getByRole('button', { name: /새 메시지|New Message|메시지 보내기|Send Message/i }).first();
         if (await newMessageButton.isVisible()) {
           await newMessageButton.click();
           await page.waitForTimeout(3000);
-          
-          const searchInput = page.getByRole('textbox', { name: /받는 사람|To/i });
-          await searchInput.waitFor({ state: 'visible' });
+
+          // 받는 사람 검색 입력 — 여러 셀렉터 시도
+          let searchInput = page.getByRole('textbox', { name: /받는 사람|To/i });
+          if (!await searchInput.isVisible({ timeout: 3000 }).catch(() => false)) {
+            searchInput = page.locator('input[name="query"], input[placeholder*="검색"], input[placeholder*="Search"]').first();
+          }
+          await searchInput.waitFor({ state: 'visible', timeout: 8000 });
           await searchInput.fill(task.handle);
           await page.waitForTimeout(4000);
-          
+
           console.log(`[STEP] Selecting the first result from the list...`);
           const resultItem = page.locator('div[role="dialog"] div[role="button"], div[role="dialog"] [role="checkbox"]').first();
-          
+
           try {
             await resultItem.waitFor({ state: 'visible', timeout: 10000 });
             await resultItem.click({ timeout: 5000 });
@@ -63,12 +67,15 @@ async function runAutoInstagram() {
             await page.getByRole('checkbox').first().click({ timeout: 5000 }).catch(() => null);
           }
           await page.waitForTimeout(2000);
-          
-          const nextButton = await page.getByRole('button', { name: /다음|Next|채팅|Chat/i });
+
+          const nextButton = page.getByRole('button', { name: /다음|Next|채팅|Chat/i });
           if (await nextButton.isVisible()) {
             await nextButton.click();
             await page.waitForTimeout(4000);
           }
+        } else {
+          const screenshot = await page.screenshot().catch(() => Buffer.from([]));
+          throw new Error(`[ERROR] "새 메시지" 버튼을 찾을 수 없습니다. handle=${task.handle}`);
         }
 
         const status = await sendInstagramDm(page, task.handle, task.message_text, 'auto', task.queue_id);

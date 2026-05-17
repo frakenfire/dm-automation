@@ -10,6 +10,9 @@
     "dryrun:x": "ts-node src/scripts/dryRunX.ts",
     "assist:instagram": "ts-node src/scripts/runAssistInstagram.ts",
     "send:instagram": "ts-node src/scripts/runAutoInstagram.ts",
+    "bulk:instagram": "ts-node src/scripts/runBulkInstagram.ts",
+    "test:send": "ts-node src/scripts/testSendInstagram.ts",
+    "login": "ts-node src/scripts/openLogins.ts",
     "ts-node": "ts-node",
     "test": "npx playwright test"
   },

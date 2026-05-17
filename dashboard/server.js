@@ -15,11 +15,11 @@ io.on('connection', (socket) => {
     
     socket.on('start-dm', (data) => {
         const { handle, message, headless, isTest } = data;
-        
+
         const scriptName = 'src/scripts/runAssistInstagram.ts';
-        
-        const env = { 
-            ...process.env, 
+
+        const env = {
+            ...process.env,
             TARGET_MESSAGE: message,
             HEADLESS: headless ? 'true' : 'false',
             TEST_MODE: isTest ? 'true' : 'false'
@@ -32,8 +32,8 @@ io.on('connection', (socket) => {
         }
 
         const child = spawn('npm.cmd', [
-            '--prefix', 'browser-agent', 
-            'run', 'ts-node', scriptName
+            '--prefix', 'browser-agent',
+            'run', 'ts-node', '--', scriptName
         ], {
             env,
             shell: true
@@ -90,8 +90,8 @@ io.on('connection', (socket) => {
         
         console.log(`[시트 데이터 요청] Sheet ID: ${sheetId}`);
         const child = spawn('npm.cmd', [
-            '--prefix', 'browser-agent', 
-            'run', 'ts-node', 'src/scripts/fetchSheet.ts'
+            '--prefix', 'browser-agent',
+            'run', 'ts-node', '--', 'src/scripts/fetchSheet.ts'
         ], {
             env,
             shell: true
@@ -154,8 +154,8 @@ io.on('connection', (socket) => {
         };
 
         const child = spawn('npm.cmd', [
-            '--prefix', 'browser-agent', 
-            'run', 'ts-node', scriptName
+            '--prefix', 'browser-agent',
+            'run', 'ts-node', '--', scriptName
         ], {
             env,
             shell: true

@@ -17,8 +17,8 @@ export async function checkInstagramLogin(page: Page): Promise<boolean> {
     return true;
   }
 
-  // 2. 홈으로 이동 (필요한 경우)
-  if (!currentUrl.includes('instagram.com') || currentUrl === 'https://www.instagram.com/') {
+  // 2. 인스타그램 도메인에 없으면 홈으로 이동
+  if (!currentUrl.includes('instagram.com')) {
     await page.goto('https://www.instagram.com/', { waitUntil: 'networkidle' }).catch(() => {});
   }
 

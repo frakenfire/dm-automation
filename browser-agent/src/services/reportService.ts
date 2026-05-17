@@ -14,7 +14,7 @@ export class ReportService {
     const errorRows = await this.client.getRows('Error_Log');
 
     const totalRuns = historyRows ? historyRows.length - 1 : 0;
-    const totalSent = logRows ? logRows.filter(r => r.includes('SENT') || r.includes('DRY_RUN_SUCCESS')).length : 0;
+    const totalSent = logRows ? logRows.filter((r: string[]) => r.some(c => c === 'SENT' || c === 'DRY_RUN_SUCCESS')).length : 0;
     const totalErrors = errorRows ? errorRows.length - 1 : 0;
 
     const report = {
@@ -26,8 +26,8 @@ export class ReportService {
         successRate: totalRuns > 0 ? (totalSent / (totalSent + totalErrors)) * 100 : 0
       },
       platformBreakdown: {
-        Instagram: logRows?.filter(r => r.includes('Instagram')).length || 0,
-        X: logRows?.filter(r => r.includes('X')).length || 0
+        Instagram: logRows?.filter((r: string[]) => r.includes('Instagram')).length || 0,
+        X: logRows?.filter((r: string[]) => r.includes('X')).length || 0
       }
     };
 

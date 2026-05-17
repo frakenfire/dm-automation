@@ -82,6 +82,10 @@ export class GoogleSheetsClient {
   }
 
   public async getSheetMetadata() {
+    if (!this.sheets || !config.googleSheetId) {
+      console.log('[MOCK] getSheetMetadata — returning empty metadata');
+      return { sheets: [] };
+    }
     const response = await this.sheets.spreadsheets.get({
       spreadsheetId: config.googleSheetId,
     });
@@ -89,6 +93,10 @@ export class GoogleSheetsClient {
   }
 
   public async createSheet(title: string) {
+    if (!this.sheets || !config.googleSheetId) {
+      console.log(`[MOCK] createSheet: ${title}`);
+      return;
+    }
     await this.sheets.spreadsheets.batchUpdate({
       spreadsheetId: config.googleSheetId,
       requestBody: {
@@ -106,6 +114,10 @@ export class GoogleSheetsClient {
   }
 
   public async setHeader(sheetName: string, headers: string[]) {
+    if (!this.sheets || !config.googleSheetId) {
+      console.log(`[MOCK] setHeader for ${sheetName}:`, headers);
+      return;
+    }
     await this.sheets.spreadsheets.values.update({
       spreadsheetId: config.googleSheetId,
       range: `${sheetName}!A1`,
