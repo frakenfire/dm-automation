@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 import { config } from '../config';
+import fs from 'fs';
 
 export class GoogleSheetsClient {
   private static instance: GoogleSheetsClient;
@@ -8,6 +9,11 @@ export class GoogleSheetsClient {
 
   private constructor() {
     try {
+      if (!fs.existsSync(config.googleCredentialsPath)) {
+        console.warn('[WARN] Google Sheets credentials not found. Switching to MOCK MODE.');
+        this.sheets = null;
+        return;
+      }
       this.auth = new google.auth.GoogleAuth({
         keyFile: config.googleCredentialsPath,
         scopes: ['https://www.googleapis.com/auth/spreadsheets'],

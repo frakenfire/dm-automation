@@ -28,29 +28,61 @@
         </section>
 
         <main class="dashboard-grid">
-            <!-- ⬅️ 좌측: 제어 패널 -->
+            <!-- ⬅️ 좌측: 제어 패널 (스크롤 적용) -->
             <aside class="service-card control-panel">
                 <div class="input-group">
-                    <label for="target-handle">타겟 핸들</label>
-                    <input type="text" id="target-handle" value="pcalm_official">
+                    <label for="input-source">발송 대상 소스</label>
+                    <select id="input-source" class="custom-select">
+                        <option value="manual">직접 입력 (핸들 목록)</option>
+                        <option value="sheets">구글 스프레드시트 연동</option>
+                    </select>
+                </div>
+
+                <!-- 직접 입력 핸들 공간 -->
+                <div id="manual-area">
+                    <div class="input-group">
+                        <label for="target-handles">타겟 인플루언서 핸들 (엔터 구분)</label>
+                        <textarea id="target-handles" rows="6" placeholder="pcalm.kr&#10;pcalm_official"></textarea>
+                    </div>
+                </div>
+
+                <!-- 구글 시트 ID 연동 공간 -->
+                <div id="sheets-area" style="display:none;">
+                    <div class="input-group">
+                        <label for="sheet-id">구글 스프레드시트 ID</label>
+                        <div class="sheet-action-group">
+                            <input type="text" id="sheet-id" placeholder="Spreadsheet ID 입력">
+                            <button type="button" id="load-sheet-btn" class="secondary-btn">불러오기</button>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="input-group">
                     <label for="dm-message">발송 메시지</label>
-                    <textarea id="dm-message" rows="12">안녕하세요. P.CALM 시딩 자동화 시스템 실전 테스트 발송입니다.</textarea>
+                    <textarea id="dm-message" rows="8">안녕하세요! 피부 스킨케어 루틴 콘텐츠를 정말 인상깊게 보고 연락드렸습니다. 현재 P.CALM 제품 무상 협찬을 진행중인데 제안드립니다!</textarea>
                 </div>
 
-                <div class="options-group">
-                    <label class="switch">
-                        <input type="checkbox" id="headless-mode" style="display:none">
-                        <span class="slider"></span>
-                        <span>백그라운드 실행 (비권장)</span>
-                    </label>
+                <div class="options-container">
+                    <div class="options-group">
+                        <label class="switch">
+                            <input type="checkbox" id="test-mode" checked style="display:none">
+                            <span class="slider"></span>
+                            <span>테스트 모드 (DM 창 활성화 후 대기)</span>
+                        </label>
+                    </div>
+
+                    <div class="options-group">
+                        <label class="switch">
+                            <input type="checkbox" id="headless-mode" style="display:none">
+                            <span class="slider"></span>
+                            <span>백그라운드 실행 (Headless)</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="btn-group">
                     <button id="send-btn" class="cta-btn">
-                        <span>DM 발송 시작</span>
+                        <span>RPA 시딩 작업 시작</span>
                         <div class="loader" id="btn-loader"></div>
                     </button>
                 </div>
@@ -59,14 +91,47 @@
                 </p>
             </aside>
 
-            <!-- ➡️ 우측: 실시간 로그 (확장) -->
-            <section class="service-card log-panel">
-                <div class="log-header">
-                    <h2>실시간 실행 로그</h2>
-                    <button id="clear-log" class="text-btn">로그 초기화</button>
+            <!-- ➡️ 우측: 모니터링 영역 (대기열 & 실시간 로그 스크롤 분할) -->
+            <section class="monitoring-panel">
+                <!-- 시딩 발송 대기열 -->
+                <div class="service-card queue-panel">
+                    <div class="log-header">
+                        <h2>시딩 발송 대기열 (Outreach Queue)</h2>
+                        <span class="badge" id="queue-count">0 READY</span>
+                    </div>
+                    <div class="table-viewport">
+                        <table class="queue-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>인플루언서</th>
+                                    <th>메시지 요약</th>
+                                    <th>전송 모드</th>
+                                    <th>현재 상태</th>
+                                </tr>
+                            </thead>
+                            <tbody id="queue-body">
+                                <tr>
+                                    <td colspan="5" class="empty-row">
+                                        <div class="empty-state">
+                                            <p>불러오거나 입력한 대기열이 없습니다.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div id="log-container" class="log-viewport">
-                    <div class="log-entry system">관제 센터 준비 완료. 내일 아침 시딩을 시작하세요.</div>
+
+                <!-- 실시간 실행 로그 -->
+                <div class="service-card log-panel">
+                    <div class="log-header">
+                        <h2>실시간 시스템 로그</h2>
+                        <button id="clear-log" class="text-btn">로그 초기화</button>
+                    </div>
+                    <div id="log-container" class="log-viewport">
+                        <div class="log-entry system">관제 센터 준비 완료. 인플루언서 타겟을 연동하고 시딩을 집행하세요.</div>
+                    </div>
                 </div>
             </section>
         </main>

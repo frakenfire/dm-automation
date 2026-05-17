@@ -28,15 +28,15 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 20px 40px;
+    padding: 15px 30px;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -53,7 +53,7 @@ header {
 }
 
 /* 🔝 상단 진행바 */
-.progress-card { padding: 15px 24px; margin-bottom: 20px; }
+.progress-card { padding: 10px 20px; margin-bottom: 15px; }
 .progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
 #progress-text { font-size: 16px; font-weight: 700; color: var(--primary-brand-color); }
 #progress-percent { font-size: 16px; font-weight: 900; }
@@ -64,7 +64,7 @@ header {
 .dashboard-grid {
     display: grid;
     grid-template-columns: 400px 1fr; /* ⬅️제어, ➡️로그 확장 */
-    gap: 30px;
+    gap: 20px;
     flex: 1;
     min-height: 0;
 }
@@ -73,13 +73,13 @@ header {
     background: var(--white-bg);
     border-radius: 8px;
     border: 1px solid var(--border-color);
-    padding: 24px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
 /* ⬅️ 제어 패널 */
-.input-group { margin-bottom: 20px; }
+.input-group { margin-bottom: 15px; }
 label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--caption-text-color); }
 input, textarea { 
     width: 100%; padding: 12px; border: 1px solid var(--border-color); 
@@ -130,3 +130,211 @@ input:checked + .slider:before { transform: translateX(20px); }
     animation: spin 1s infinite linear; display: none;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ⬇️ Clean, Gap-Free Spreadsheet Layout Modifications */
+
+/* Scroll Control for Left Input Panel */
+.control-panel {
+    overflow-y: auto;
+    max-height: 100%;
+    scrollbar-width: thin;
+    padding-right: 15px;
+}
+
+/* 2-Column Right Monitoring Layout Sharing Height */
+.monitoring-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 0;
+    flex: 1;
+}
+
+.queue-panel {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.log-panel {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Beautiful Scrollable Table Viewport */
+.table-viewport {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: #FFFFFF;
+    margin-top: 10px;
+}
+
+.queue-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+}
+
+.queue-table th {
+    background-color: var(--light-gray-bg);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    font-weight: 700;
+    padding: 10px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.queue-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--base-text-color);
+}
+
+.empty-row {
+    text-align: center;
+    padding: 30px 0;
+    color: var(--caption-text-color);
+}
+
+.badge {
+    background-color: var(--lighter-blue-bg);
+    color: var(--primary-brand-color);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* Elegant minimalist status pills */
+.status-pill {
+    display: inline-flex;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-pill.ready {
+    background-color: var(--light-gray-bg);
+    color: var(--caption-text-color);
+}
+
+.status-pill.processing {
+    background-color: var(--lighter-blue-bg);
+    color: var(--primary-brand-color);
+}
+
+.status-pill.success {
+    background-color: #E6F4EA;
+    color: var(--success-color);
+}
+
+.status-pill.failed {
+    background-color: #FCE8E6;
+    color: var(--error-color);
+}
+
+/* Custom Minimal Select Input */
+.custom-select {
+    background-color: var(--light-gray-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--base-text-color);
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* Sheet Action Input Alignment */
+.sheet-action-group {
+    display: flex;
+    gap: 10px;
+}
+
+.sheet-action-group input {
+    flex: 1;
+}
+
+.secondary-btn {
+    background-color: var(--white-bg);
+    border: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    padding: 0 16px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.secondary-btn:hover {
+    background-color: var(--light-gray-bg);
+}
+
+/* Options vertical spacing */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.options-group {
+    margin-bottom: 0px;
+}
+
+/* 💎 Beautiful Premium Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border: 1.5px solid transparent;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Clean scrollbar for Firefox */
+.control-panel, .table-viewport, .log-viewport, textarea {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+/* 📱 Responsive Height Support for Smaller Laptops (e.g. 768p, 800p) */
+@media (max-height: 820px) {
+    body {
+        overflow-y: auto;
+    }
+    #app {
+        height: auto;
+        min-height: 100vh;
+    }
+    .dashboard-grid {
+        height: auto;
+        flex: none;
+    }
+    .control-panel, .table-viewport, .log-viewport {
+        max-height: 480px; /* Constrain internal elements so they don't stretch forever, but scroll nicely */
+    }
+}
+
+
